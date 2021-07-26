@@ -1,8 +1,7 @@
-Shader "Practice/CubeMap"
+Shader "Practice/ReflectionProbe"
 {
     Properties
     {
-        _CubeMap("Cube Map", Cube) = "white" {}
         _NormalMap("Normal Map", 2D) = "bump" {}
         _AOMap("AO Map", 2D) = "white" {}
         _Rotate("Rotate", Range(0, 360)) = 0
@@ -39,8 +38,6 @@ Shader "Practice/CubeMap"
 
             };
             
-            samplerCUBE _CubeMap;
-            float4 _CubeMap_HDR;      
             sampler2D _NormalMap;
             float4 _NormalMap_ST;
 
@@ -82,12 +79,12 @@ Shader "Practice/CubeMap"
 
                 reflect_dir = RotateAround(_Rotate, reflect_dir);
 
-                half4 color_cubeMap = texCUBE(_CubeMap, reflect_dir);
-                half3 env_color = DecodeHDR(color_cubeMap, _CubeMap_HDR);
-                
+                half4 env_color = UNITY_SAMPLE_TEXCUBE(unity_SpecCube0, reflect_dir);
+                half3 env_hdr_color = DecodeHDR(env_color, unity_SpecCube0_HDR);
+
                 half ao = tex2D(_AOMap, i.uv).r;
 
-                half3 finial_color = env_color * ao;
+                half3 finial_color = env_hdr_color * ao;
                 
                 return float4(finial_color, 1.0);
 
