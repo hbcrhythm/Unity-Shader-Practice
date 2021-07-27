@@ -1,4 +1,4 @@
-Shader "Practice/CubeMap"
+Shader "Practice5/CubeMap"
 {
     Properties
     {
