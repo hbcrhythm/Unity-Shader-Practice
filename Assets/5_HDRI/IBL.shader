@@ -3,7 +3,7 @@ Shader "Practice5/IBL"
     Properties
     {
         _CubeMap("Cube Map", Cube) = "white" {}
-        _Tint("Tint", color) = (1,1,1,1)
+        _Tint("Tint", Color) = (1,1,1,1)
         _Expose("Expose", float) = 1.0
         _NormalMap("Normal Map", 2D) = "bump" {}
         _AOMap("AO Map", 2D) = "white" {}

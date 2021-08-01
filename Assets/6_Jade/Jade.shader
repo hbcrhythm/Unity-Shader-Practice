@@ -1,4 +1,4 @@
-Shader "Practice6 /Jade"
+Shader "Practice6/Jade"
 {
     Properties
     {
@@ -31,12 +31,6 @@ Shader "Practice6 /Jade"
 
     SubShader
     {
-        Tags
-        {
-            "RenderType" = "Opaque"
-        }
-        LOD 100
-
         Pass
         {
             Tags
@@ -177,6 +171,7 @@ Shader "Practice6 /Jade"
 
             sampler2D _ThicknessMap;
             float4 _DiffuseColor;
+            
             float4 _LightColor0;
             float4 _AddColor;
             float _Opacity;
