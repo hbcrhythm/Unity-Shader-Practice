@@ -140,7 +140,7 @@ Shader "Unlit/Role"
             fixed4 frag (v2f i) : SV_Target
             {
                 half4 albedo_color = tex2D(_BaseMap, i.uv);
-                // half4 albedo_color = pow(albedo_color, 2.2);
+                albedo_color = pow(albedo_color, 2.2);
 
                 half4 comp_mask = tex2D(_CompMask, i.uv);
 
@@ -200,6 +200,8 @@ Shader "Unlit/Role"
                 half3 Indirect_specular = env_color * _Expose * spec_color * half_lambert;
 
                 half3 final_color = direct_diffuse + direct_specular + Indirect_diffuse + Indirect_diffuse + Indirect_specular;
+                
+                final_color = pow(final_color, 1.0/2.2);
 
                 return float4(final_color, 1.0);
             }
