@@ -8,6 +8,7 @@ Shader "Practice8/KKAniso"
         _ShiftOffset("_ShiftOffset", Range(-1, 1)) = 0
         _ShiftMap("ShiftMap", 2D) = "white" {}
         _NoiseIntensity("_NoiseIntensity", Float) = 1.0
+        _FlowMap("_FlowMap", 2D) = "gray" {}  
     }
     SubShader
     {
@@ -42,6 +43,7 @@ Shader "Practice8/KKAniso"
 
             sampler2D _ShiftMap;
             float4 _ShiftMap_ST;
+            sampler2D _FlowMap;
 
             float4 _LightColor0;
             float _SpecIntensity;
@@ -73,9 +75,16 @@ Shader "Practice8/KKAniso"
 
                 half3 half_dir = normalize(light_dir + view_dir);
 
+                half3 flowmap = tex2D(_FlowMap, i.uv).rgb;
+                half2 aniso_dir = flowmap.rg * 2.0 - 1.0;
+                half shiftnoise = flowmap.b * 2.0 - 1.0;
+
+
+                binormal_dir = normalize(tangent_dir * aniso_dir.y + binormal_dir * aniso_dir.x);
+
                 half2 uv_shift = i.uv * _ShiftMap_ST.xy + _ShiftMap_ST.zw;
-                half shiftnoise = tex2D(_ShiftMap, uv_shift).r;
-                shiftnoise = (shiftnoise * 2.0 - 1.0) * _NoiseIntensity;
+                // half shiftnoise = tex2D(_ShiftMap, uv_shift).r;
+                shiftnoise = shiftnoise* _NoiseIntensity;
                 half3 b_offset = normal_dir * (_ShiftOffset + shiftnoise);
 
                 binormal_dir = normalize(binormal_dir + b_offset);

@@ -1,4 +1,4 @@
-Shader "Unlit/Role"
+Shader "Practice7/Role"
 {
     Properties
     {
