@@ -48,10 +48,11 @@ Shader "Dissolve_Easy"
 			float2 uv_MainTex = i.uv_texcoord * _MainTex_ST.xy + _MainTex_ST.zw;
 			float4 tex2DNode2 = tex2D( _MainTex, uv_MainTex );
 			float2 uv_Gradient = i.uv_texcoord * _Gradient_ST.xy + _Gradient_ST.zw;
+			float mulTime33 = _Time.y * 0.2;
 			#ifdef _MANUALCONTROL_ON
 				float staticSwitch35 = _ChangeMount;
 			#else
-				float staticSwitch35 = frac( _Time.y );
+				float staticSwitch35 = frac( mulTime33 );
 			#endif
 			float Gradient29 = ( ( tex2D( _Gradient, uv_Gradient ).r - (-0.1823034 + (staticSwitch35 - 0.0) * (1.0 - -0.1823034) / (1.0 - 0.0)) ) / 0.1823034 );
 			float clampResult20 = clamp( ( 1.0 - ( distance( Gradient29 , 0.5 ) / 0.1 ) ) , 0.0 , 1.0 );
@@ -68,12 +69,12 @@ Shader "Dissolve_Easy"
 }
 /*ASEBEGIN
 Version=18900
-97;65;1796;850;1863.157;88.75171;1.659745;False;False
+76;141;1796;850;2017.492;234.0889;1.659745;False;False
 Node;AmplifyShaderEditor.CommentaryNode;28;-1769.684,188.9451;Inherit;False;1233.35;837.0918;Gradient;11;29;9;3;7;35;37;36;4;34;33;38;Gradient;1,1,1,1;0;0
-Node;AmplifyShaderEditor.SimpleTimeNode;33;-1734.143,550.6235;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;4;-1753.58,678.6832;Inherit;False;Property;_ChangeMount;ChangeMount;3;0;Create;True;0;0;0;False;0;False;0.5;0.527;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;36;-1651.235,874.3002;Inherit;False;Constant;_Spread;Spread;7;0;Create;True;0;0;0;False;0;False;0.1823034;0;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleTimeNode;33;-1734.143,550.6235;Inherit;False;1;0;FLOAT;0.2;False;1;FLOAT;0
 Node;AmplifyShaderEditor.FractNode;34;-1540.143,549.6235;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;4;-1753.58,678.6832;Inherit;False;Property;_ChangeMount;ChangeMount;3;0;Create;True;0;0;0;False;0;False;0.5;0.435;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;36;-1651.235,874.3002;Inherit;False;Constant;_Spread;Spread;7;0;Create;True;0;0;0;False;0;False;0.1823034;0;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.StaticSwitch;35;-1396.143,642.6235;Inherit;False;Property;_ManualControl;ManualControl;6;0;Create;True;0;0;0;False;0;False;0;0;1;True;;Toggle;2;Key0;Key1;Create;True;True;9;1;FLOAT;0;False;0;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.NegateNode;37;-1373.648,770.3456;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TFHCRemapNode;7;-1123.489,621.0129;Inherit;False;5;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;-1;False;4;FLOAT;1;False;1;FLOAT;0
@@ -126,4 +127,4 @@ WireConnection;11;1;8;0
 WireConnection;0;2;25;0
 WireConnection;0;10;11;0
 ASEEND*/
-//CHKSM=D30E9CE6C10905F8E70384C0F4F8C4FB5FDE5A32
+//CHKSM=37BF9210C7DBDE008506E673733E0C5F9857C338

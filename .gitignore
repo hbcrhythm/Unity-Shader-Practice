@@ -1,1 +1,10 @@
 Assets/AmplifyShaderEditor*
+.vs*
+Unity-Shader*
+*.csproj
+Temp
+UserSettings
+Packages
+obj
+Logs
+Library
